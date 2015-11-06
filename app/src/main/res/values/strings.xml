@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Selpilwali</string>
+
+    <string name="btnMemilih"> Aku sih yes !
+        \n Yuk Selfie ^^</string>
+    <string name="btnGolput">Golput Aja</string>
+    <string name="or">(or)</string>
+    <string name="btnUploadToServer">Upload to Server</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_pilih">PilihActivity</string>
+    <string name="title_activity_golput">GolputActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="facebook_app_id">1654239781510615</string>
+</resources>
