@@ -1,8 +1,11 @@
 package id.lapro.selpilwali;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -17,6 +20,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.Signature;
@@ -36,10 +41,14 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.facebook.FacebookSdk;
+import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 
 public class MainActivity extends AppCompatActivity
@@ -60,6 +69,10 @@ public class MainActivity extends AppCompatActivity
 
     private Button btnMemilih, btnGolput;
     public static final String PREFS_NAME = "MyPrefsFile";
+
+    private ImageView imageview;
+    private Profile profile;
+    private TextView namaSaya;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +96,21 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        /* SET foto di drawable
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+
+        Profile profile = Profile.getCurrentProfile();
+
+        imageview = (ImageView)findViewById(R.id.imageView);
+
+        imageview.setImageDrawable(LoadImageFromWebOperations(profile.getProfilePictureUri(20,20).toString()));
+
+         /* END SET foto di drawable */
+
+        //namaSaya = (TextView) findViewById(R.id.namaSaya);
+        //namaSaya.setText("azzz");
+        //showAlert(namaSaya.getFontFeatureSettings());
         /**
          * Capture image button click event
          */
@@ -117,6 +145,17 @@ public class MainActivity extends AppCompatActivity
         }
 
 
+    }
+
+
+    public static Drawable LoadImageFromWebOperations(String url) {
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, "src name");
+            return d;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /**
@@ -363,5 +402,16 @@ public class MainActivity extends AppCompatActivity
         finish();
     }
 
-
+    private void showAlert(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message).setTitle("Response from Servers")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // do nothing
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 }

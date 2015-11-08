@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Terima Kasih Anda Sudah berkontribusi \n lihat grafik meilih dan golput \n disini \n http://selpilwali.lapro.id"
+        android:text="Terima Kasih Anda Sudah berkontribusi \n lihat grafik memilih dan golput \n disini \n http://selpilwali.lapro.id"
         android:id="@+id/textView3"
         android:textAlignment="center"
         android:autoLink="web"

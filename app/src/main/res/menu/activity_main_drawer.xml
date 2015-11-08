@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_profil_calon" android:icon="@android:drawable/ic_menu_camera"
+        <item android:id="@+id/nav_profil_calon" android:icon="@drawable/ic_menu_cc_am"
             android:title="Profil Calon" />
-        <item android:id="@+id/nav_berita" android:icon="@android:drawable/ic_menu_gallery"
+        <item android:id="@+id/nav_berita" android:icon="@drawable/ic_menu_notification"
             android:title="Berita" />
 
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Account">
         <menu>
-            <item android:id="@+id/nav_logout" android:icon="@android:drawable/ic_menu_share"
+            <item android:id="@+id/nav_logout" android:icon="@drawable/ic_menu_stop"
                 android:title="Logout" />
         </menu>
     </item>
