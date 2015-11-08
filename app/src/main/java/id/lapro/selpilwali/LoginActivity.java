@@ -1,6 +1,7 @@
 package id.lapro.selpilwali;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -32,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextView info;
     private LoginButton loginButton;
+    public static final String PREFS_NAME = "MyPrefsFile";
 
     private CallbackManager callbackManager;
 
@@ -45,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,10 +57,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
+        */
 
         info = (TextView)findViewById(R.id.info);
         loginButton = (LoginButton)findViewById(R.id.login_button);
+
+        // Restore preferences
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        boolean selesai = settings.getBoolean("selesai", false);
 
 
         if(!isLoggedIn()) {
@@ -67,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
                     // App code
-
+                    /*
                     info.setText(
                             "User ID: "
                                     + loginResult.getAccessToken().getUserId()
@@ -75,6 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                                     "Auth Token: "
                                     + loginResult.getAccessToken().getToken()
                     );
+                    */
                    // Profile profile = Profile.getCurrentProfile();
                    // info.setText(profile.getName());
                     showMain();
@@ -95,7 +102,13 @@ public class LoginActivity extends AppCompatActivity {
             });
         }else{
 
-            showMain();
+            if(!selesai) {
+                showMain();
+            }else{
+                showSelesai();
+            }
+
+
         }
 
     }
@@ -103,6 +116,12 @@ public class LoginActivity extends AppCompatActivity {
     public void showMain(){
         // Send logged in users to Welcome.class
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    public void showSelesai(){
+        // Send logged in users to Welcome.class
+        Intent intent = new Intent(this, SelesaiActivity.class);
         startActivity(intent);
         finish();
     }

@@ -15,4 +15,8 @@
     <string name="title_activity_golput">GolputActivity</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="facebook_app_id">1654239781510615</string>
+    <string name="title_activity_share">Bagikan Ke Teman</string>
+    <string name="title_activity_berita">Berita</string>
+    <string name="title_activity_calon">ProfilCalon</string>
+    <string name="title_activity_selesai">Home</string>
 </resources>

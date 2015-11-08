@@ -1,5 +1,7 @@
 package id.lapro.selpilwali;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -10,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +36,11 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
+
+import com.facebook.login.LoginManager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -52,13 +59,17 @@ public class MainActivity extends AppCompatActivity
     private Uri fileUri; // file url to store image/video
 
     private Button btnMemilih, btnGolput;
+    public static final String PREFS_NAME = "MyPrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         btnMemilih = (Button) findViewById(R.id.btnMemilih);
         btnGolput = (Button) findViewById(R.id.btnGolput);
@@ -224,6 +235,7 @@ public class MainActivity extends AppCompatActivity
         i.putExtra("filePath", fileUri.getPath());
         i.putExtra("isImage", isImage);
         startActivity(i);
+        finish();
     }
 
     /**
@@ -312,22 +324,44 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camara) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        if (id == R.id.nav_profil_calon) {
 
-        } else if (id == R.id.nav_manage) {
+            bukaCalon();
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_berita) {
 
-        } else if (id == R.id.nav_send) {
+          bukaBerita();
 
+        } else if (id == R.id.nav_logout) {
+            logout();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void bukaBerita(){
+        Intent intent = new Intent(this, BeritaActivity.class);
+
+        startActivity(intent);
+    }
+
+    public void bukaCalon(){
+        Intent intent = new Intent(this, CalonActivity.class);
+
+        startActivity(intent);
+    }
+
+    public void logout(){
+
+        LoginManager.getInstance().logOut();
+        Intent intent = new Intent(this, LoginActivity.class);
+
+        startActivity(intent);
+        finish();
+    }
+
+
 }
